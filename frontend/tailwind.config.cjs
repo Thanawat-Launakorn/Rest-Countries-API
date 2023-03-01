@@ -14,12 +14,16 @@ module.exports = {
       indigo: colors.indigo,
       yellow: colors.yellow,
       blue: colors.blue,
-      darkblue: 'hsl(209, 23%, 22%)', // (Dark Mode Elements)
-      verydarkblue: 'hsl(207, 26%, 17%)', // (Dark Mode Background)
-      verydarkblue2: 'hsl(200, 15%, 8%)', // (Light Mode Text)
-      darkgray: 'hsl(0, 0%, 52%)', // (Light Mode Input)
-      verylightgray: 'hsl(0, 0%, 98%)', // (Very Light Gray)
-      white1: 'hsl(0, 0%, 100%)' // (Dark mode text and light mode elements)
+      dark: {
+        element: 'hsl(209, 23%, 22%)',
+        background: 'hsl(207, 26%, 17%)',
+        text: 'hsl(0, 0%, 100%)',
+      },
+      light: {
+        element: 'hsl(0, 0%, 100%)',
+        background: 'hsl(0, 0%, 98%)',
+        text: 'hsl(200, 15%, 8%)'
+      },
     },
     extend: {},
   },
