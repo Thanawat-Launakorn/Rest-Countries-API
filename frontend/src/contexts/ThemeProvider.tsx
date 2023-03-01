@@ -17,10 +17,12 @@ function getInitialTheme(): string {
     return 'dark'
 }
 
-type ThemeProviderProps = {
+type ThemeProviderProps = { //alias
     initialTheme?: string
     children: React.ReactNode
 }
+
+
 
 interface ThemeContextProps {
     theme?: string
@@ -31,7 +33,7 @@ export const ThemeContext = React.createContext<ThemeContextProps>({})
 
 function ThemeProvider({ initialTheme, children }: ThemeProviderProps) {
     const [theme, setTheme] = useState(getInitialTheme)
-
+    
     useEffect(() => rawSetTheme(theme), [theme])
 
     const rawSetTheme = (theme: string) => {

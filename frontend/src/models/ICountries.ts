@@ -1,5 +1,8 @@
+import Flag from "./IFlag";
+import Name from "./IName";
+
 export default interface DataCountries {
-    name: string,
+    name: Name,
     topLevelDomain: any[],
     capital: string,
     subregion: string,
@@ -8,5 +11,5 @@ export default interface DataCountries {
     borders: any[],
     currencies: any[],
     flag: string
-
-}
+    flags: Flag
+}   
