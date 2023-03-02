@@ -2,13 +2,15 @@ import React, { useContext } from 'react'
 import DataCountries from '../../models/ICountries'
 type CardProps = {
     data: DataCountries
+    className: string
 }
 export default function Card(props: CardProps) {
     const { name, flag, population, region, capital, flags } = props.data
+    const { className } = props
 
     return (
         <div>
-            <div className='shadow-xl rounded-md overflow-hidden bg-light-element dark:bg-dark-element transition-all ease-linear delay-200 hover:brightness-75 dark:hover:brightness-125 hover:delay-75 hover:cursor-pointer'>
+            <div className={`${className}`}>
                 <img src={flags.svg} alt={flags.alt} className='object-cover h-36 w-full' />
                 <div className='pt-5 pb-10 px-5 '>
                     <h1 className='mb-2 font-bold text-md tracking-wide text-light-text dark:text-dark-text transition-all ease-linear delay-200'>{name.common}</h1>

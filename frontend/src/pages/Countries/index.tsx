@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, ChangeEventHandler } from 'react'
 import Form from '../../components/Form/Form'
 import InfiniteScrool from '../../components/InfiniteScroll/InfiniteScrool'
 import DataCountries from '../../models/ICountries'
@@ -7,7 +7,7 @@ import FilterCountryForm from '../../models/IFilterCountryForm'
 import useDebounce from '../../core/hook/useDebounce'
 import { Link } from 'react-router-dom'
 import Card from '../../components/Card/Card'
-import { render } from 'react-dom'
+import { EMPTY_FUNCTION } from '../../utils'
 export default function Countries() {
     const [countries, setCountries] = useState<Array<DataCountries>>([])
     const [countryName, setCountryName] = useState('')
@@ -46,6 +46,32 @@ export default function Countries() {
         []
     )
 
+    const renderCard = ({ item, key }: { item: DataCountries, key: string | number }) => (
+        <Link
+            key={key}
+            to={{
+                pathname: `/countries/${key}`,
+            }}
+        >
+            <Card
+                data={item}
+                key={key}
+                className='shadow-xl rounded-md overflow-hidden bg-light-element dark:bg-dark-element transition-all ease-linear delay-200 hover:brightness-75 dark:hover:brightness-125 hover:delay-75 hover:cursor-pointer'
+            />
+        </Link>
+    )
+
+    const handleChangeSearchField = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setCountryName('')
+        setCountryName(e.target.value)
+    }
+
+    const handleSelectField = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectRegion('')
+        setSelectRegion(e.target.value)
+    }
+
+
     useEffect(() => {
         if (debounceRegion || debounceSearch || debounceSearch === '') {
             ; (async () => {
@@ -58,23 +84,17 @@ export default function Countries() {
 
     }, [debounceRegion, debounceSearch, handleSearchCountries])
 
-    const renderCard = ({ item, key }: { item: DataCountries, key: string | number }) => (
-        <Link
-            key={key}
-            to={{
-                pathname: `/countries/${key}`,
-            }}
-        >
-            <Card
-                data={item}
-                key={key}
-            />
-        </Link>
-    )
+    useEffect(EMPTY_FUNCTION, [selectRegion])
+
 
     return (
         <div className=''>
-            <Form />
+            <Form
+                onChangeSearchField={handleChangeSearchField}
+                onChangeSelectField={handleChangeSearchField}
+                countryName={countryName}
+                selectRegion={selectRegion}
+            />
             <InfiniteScrool
                 items={countries}
                 keyExtractor={({ alpha3Code }) => alpha3Code}
